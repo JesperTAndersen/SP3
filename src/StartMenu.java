@@ -26,6 +26,7 @@ public class StartMenu {
                 password = ui.promptText("Indtast Password: ");
                 createAccount(username, password);
 
+
                 break;
 
         }
@@ -39,11 +40,13 @@ public class StartMenu {
             String newUserName = values[0];
             if (newUserName.equalsIgnoreCase(username)){
                 ui.displayMessage("Brugernavn eksisterer allerede, prøv igen.");
+                username = ui.promptText("Skriv nyt Brugernavn: ");
                 this.createAccount(username, password);
+            } else {
+                Account a = new Account(username, password);
+                ui.displayMessage("Konto oprettet!");
+                a.addAccount(a);
             }
-            Account a = new Account(username, password);
-            ui.displayMessage("Konto oprettet!");
-            a.addAccount(a);
         }
     }
 }
