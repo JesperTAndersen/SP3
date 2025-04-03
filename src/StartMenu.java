@@ -32,7 +32,7 @@ public class StartMenu {
         }
     }
 
-    public void createAccount(String username, String password){
+    private void createAccount(String username, String password){
         accData = io.readData("data/accountDetails.csv");
 
         for (int i = 0; i < accData.size(); i++) {
