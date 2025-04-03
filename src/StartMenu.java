@@ -38,15 +38,17 @@ public class StartMenu {
         for (int i = 0; i < accData.size(); i++) {
             String[] values = accData.get(i).split(";");
             String newUserName = values[0];
-            if (newUserName.equalsIgnoreCase(username)){
+            if (newUserName.equalsIgnoreCase(username)) {
                 ui.displayMessage("Brugernavn eksisterer allerede, prøv igen.");
                 username = ui.promptText("Skriv nyt Brugernavn: ");
                 this.createAccount(username, password);
-            } else {
-                Account a = new Account(username, password);
-                ui.displayMessage("Konto oprettet!");
-                a.addAccount(a);
+                return;
             }
         }
+        Account a = new Account(username, password);
+        ui.displayMessage("Konto oprettet!");
+        a.addAccount(a);
+
+        }
     }
-}
+

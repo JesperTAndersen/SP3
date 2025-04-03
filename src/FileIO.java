@@ -11,8 +11,12 @@ public class FileIO {
         try {
             FileWriter writer = new FileWriter(path, true); //append = true makes so it overwrites instead.
             File file = new File(path);
+            boolean fileExists = file.exists();
+            boolean fileIsEmpty = file.length() == 0;
 
-            writer.write(header+"\n");
+            if (!fileExists || fileIsEmpty) {
+                writer.write(header + "\n"); // Write header if file is new or empty
+            }
 
             for (String s : list) {
                 writer.write(s+"\n");
