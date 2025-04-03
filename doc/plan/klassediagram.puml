@@ -50,12 +50,12 @@ abstract class Media {
 
 }
 class Movie {
-- ArrayList<movies>
+- ArrayList<String> movies
 + void getMovies()
 }
 class Series{
 + int[][]  seriesSeasons
-- ArrayList<series>
+- ArrayList<String> series
 + void getSeries()
 }
 class Search{
