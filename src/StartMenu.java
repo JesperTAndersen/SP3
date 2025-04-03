@@ -30,4 +30,20 @@ public class StartMenu {
 
         }
     }
+
+    public void createAccount(String username, String password){
+        accData = io.readData("data/accountDetails.csv");
+
+        for (int i = 0; i < accData.size(); i++) {
+            String[] values = accData.get(i).split(";");
+            String newUserName = values[0];
+            if (newUserName.equalsIgnoreCase(username)){
+                ui.displayMessage("Brugernavn eksisterer allerede, prøv igen.");
+                this.createAccount(username, password);
+            }
+            Account a = new Account(username, password);
+            ui.displayMessage("Konto oprettet!");
+            a.addAccount(a);
+        }
+    }
 }
