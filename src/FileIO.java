@@ -9,8 +9,11 @@ public class FileIO {
 
     public void saveData(ArrayList<String> list, String path, String header){
         try {
-            FileWriter writer = new FileWriter(path);
+            FileWriter writer = new FileWriter(path, true); //append = true makes so it overwrites instead.
+            File file = new File(path);
+
             writer.write(header+"\n");
+
             for (String s : list) {
                 writer.write(s+"\n");
             }
