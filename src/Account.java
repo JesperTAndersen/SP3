@@ -5,6 +5,11 @@ public class Account {
     private String password;
     private ArrayList<User> users;
 
+    Account(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
     public void createAccount(){}
 
     public void getUsers(){}
