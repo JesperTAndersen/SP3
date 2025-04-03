@@ -20,6 +20,7 @@ class Account {
 - String password
 - ArrayList<User>
 
++ Account(String username, String password)
 + void createAccount()
 + void getUsers()
 }
@@ -29,6 +30,8 @@ class User {
 - boolean isKid
 - ArrayList<String> haveWatched
 - ArrayList<String> myList
++ User(String name)
++ User(String name, boolean isKid)
 + boolean getIsKid()
 + void getMyList()
 + void getWatchedList()
