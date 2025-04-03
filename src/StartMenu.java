@@ -8,25 +8,25 @@ public class StartMenu {
     private ArrayList<String> accData;
 
 
-    void login(){
+    public void runChill(){
         ui.displayMessage("Velkommen til Chill");
         int userChoice = ui.promptNumeric("1. Login \n2. Opret Konto \n");
-
+        String username;
+        String password;
 
         switch (userChoice){
             case 1:
 
-                    String username = ui.promptText("Indtast Brugernavn: ");
-                    String password = ui.promptText("Indtast Password: ");
+                username = ui.promptText("Indtast Brugernavn: ");
+                password = ui.promptText("Indtast Password: ");
 
-
+                //accountLogin()
+                break;
 
             case 2:
                 username = ui.promptText("Indtast Brugernavn: ");
                 password = ui.promptText("Indtast Password: ");
                 createAccount(username, password);
-
-
                 break;
 
         }
