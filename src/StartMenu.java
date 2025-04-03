@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.ArrayList;
 
 public class StartMenu {
@@ -20,13 +19,13 @@ public class StartMenu {
                 username = ui.promptText("Indtast Brugernavn: ");
                 password = ui.promptText("Indtast Password: ");
 
-                //accountLogin()
+                //this.loginMethod();
                 break;
 
             case 2:
                 username = ui.promptText("Indtast Brugernavn: ");
                 password = ui.promptText("Indtast Password: ");
-                createAccount(username, password);
+                this.createAccount(username, password);
                 break;
 
         }
@@ -51,4 +50,3 @@ public class StartMenu {
 
         }
     }
-
