@@ -12,5 +12,9 @@ public class Account {
 
     public void createAccount(){}
 
-    public void getUsers(){}
+    public User getUsers(){
+        for (User u : users){
+            return u;
+        }
+    }
 }
