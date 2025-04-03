@@ -15,6 +15,6 @@ public class Account {
     public User getUsers(){
         for (User u : users){
             return u;
-        }
+        } return null;
     }
 }
