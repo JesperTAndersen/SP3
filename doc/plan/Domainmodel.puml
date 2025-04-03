@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/object-diagram
+!pragma layout smetana
+
+object StartMenu
+object MainMenu
+object User
+object Child
+object Login
+object Media {
+    Search
+    PlayMedia
+}
+object Movie
+object Series
+object Category
+object Watched
+object WatchList
+object Rating
+object Genre
+object ReleaseYear
+
+StartMenu *-- Login
+MainMenu *-- Login
+Login *-- User
+User <|-- Child
+
+MainMenu *-- User
+
+
+MainMenu *-- Media
+User *-- Watched
+User *-- WatchList
+
+Media <|-- Series
+Media <|-- Movie
+
+Media *-- Category
+Category <|-- Genre
+Media *-- Rating
+Media *-- ReleaseYear
+
+
+@enduml
