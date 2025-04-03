@@ -1,0 +1,94 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class StartMenu {
+- ArrayList<Account>
++ void login ()
+
+}
+class MainMenu {
++ void displayOptions(//search)
+- void myList()
+- void haveWatchedList()
+- void changeUser()
+- void logout()
+}
+
+class Account {
+- String username
+- String password
+- ArrayList<User>
+
++ void createAccount()
++ void getUsers()
+}
+
+class User {
++ String name
+- boolean isKid
+- ArrayList<String> haveWatched
+- ArrayList<String> myList
++ boolean getIsKid()
++ void getMyList()
++ void getWatchedList()
+}
+
+
+
+
+abstract class Media {
+# String name
+# int releaseYear
+# ArrayList<String> Genre
+# double imdbRating
++ playMedia()
+- exitOptions()
+
+}
+class Movie {
+- ArrayList<movies>
++ void getMovies()
+}
+class Series{
++ int[][]  seriesSeasons
+- ArrayList<series>
++ void getSeries()
+}
+class Search{
++void searchOptions()
+- void searchByText()
+- void searchMovie()
+- void searchSeries()
+- void searchGenre()
+}
+class TextUI {
+- Scanner scan
++ boolean promptBinary(String msg)
++ String promptText(String msg)
++ int promptNumeric(String msg)
++ ArrayList<String> promptChoice(ArrayList<String> options, int limit, String msg)
++ void displayMessage(String msg)
++ void displayList(ArrayList<String> list, String msg)
+}
+class FileIO{
++ void saveData(ArrayList<String> data, String path, String header)
++ ArrayList<String> readData(String path)
++ String[] readData(String path, int length)
+}
+
+
+StartMenu *-- Account
+Account <|-- User
+StartMenu *-- MainMenu
+MainMenu *-- Search
+Search *-- Media
+Media <|-- Movie
+Media <|-- Series
+
+MainMenu *-- FileIO
+MainMenu *-- TextUI
+
+
+}
+
+@enduml
