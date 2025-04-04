@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.ArrayList;
 
 public class StartMenu {
@@ -11,28 +10,23 @@ public class StartMenu {
     public void runChill(){
         ui.displayMessage("Velkommen til Chill");
         int userChoice = ui.promptNumeric("1. Login\n2. Opret Konto");
-        String username;
-        String password;
+
+        String username = ui.promptText("Indtast Brugernavn: ");
+        String password = ui.promptText("Indtast Kodeord: ");
 
         switch (userChoice){
             case 1:
-                username = ui.promptText("Indtast Brugernavn: ");
-                password = ui.promptText("Indtast Kodeord: ");
-
                 if(accountLogin(username,password)){
-                    Account a = new Account(username, password);
-                    MainMenu m = new MainMenu();
-                    m.chooseUser(a);
+                    this.loginSucces(username, password);
                  }
-
                 break;
+
             case 2:
-                username = ui.promptText("Indtast Brugernavn: ");
-                password = ui.promptText("Indtast Kodeord: ");
                 createAccount(username, password);
+                this.loginSucces(username, password);
                 break;
-
         }
+
     }
 
     private void createAccount(String accountName, String password) {
@@ -50,9 +44,10 @@ public class StartMenu {
         }
         Account a = new Account(accountName, password);
         ui.displayMessage("Konto oprettet!");
-        String Username = ui.promptText("Ingen brugere fundet, opret ny med følgende navn: ");
-        a.createUser(Username);
 
+        a.createUser(ui.promptText("Ingen brugere fundet, opret ny med følgende navn: "));
+
+        // tilføj flere users før account create?
         a.addAccount(a);
 
     }
@@ -90,5 +85,10 @@ public class StartMenu {
 
     }
 
+    public void loginSucces(String username, String password){
+        Account a = new Account(username, password);
+        MainMenu m = new MainMenu();
+        m.displayOptions(a);
+    }
 }
 

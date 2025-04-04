@@ -26,7 +26,7 @@ public class Account {
         io.saveData(accountData,"data/accountDetails.csv", "username;password;users");
     }
     
-    public void showUsers(){
+    public int chooseUser(){
 
         ArrayList<String> userData = new ArrayList<>();
 
@@ -36,13 +36,22 @@ public class Account {
             String[] values = userData.get(i).split(";");
             String searchAccount = values[0];
             if(this.accountName.equalsIgnoreCase(searchAccount)){
-                String[] userList = values[2].split(",");
+                //This part of the code removes the [] from the user array..
+                String[] userList;
+                String value = values[2];
+                userList = value.substring(1, value.length()-1).split(",");
+
+                int count = 1;
                 for (String u : userList) {
                     User user = new User(u);
-                    System.out.println(u);
+                    System.out.println(count +". " + u);
+                    count++;
                 }
+
+                return ui.promptNumeric("vælg bruger: ");
             }
         }
+        return 0;
     }
 
     public User getUsers(){
