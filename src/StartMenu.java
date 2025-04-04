@@ -71,7 +71,7 @@ public class StartMenu {
                 }
             }
 
-            // If no match was found, prompt error message and run the while loop until accountLogin returns true
+            // If no match was found, prompt error message and run the while loop until accountLogin returns true..
             ui.displayMessage("Brugernavn eller kodeord er forkert! .. Prøv igen");
             //Prompts the user for accountname and password again to run back into the while loop
             accountName = ui.promptText("Brugernavn: ");
