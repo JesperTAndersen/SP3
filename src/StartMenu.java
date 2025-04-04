@@ -18,10 +18,12 @@ public class StartMenu {
             case 1:
                 username = ui.promptText("Indtast Brugernavn: ");
                 password = ui.promptText("Indtast Kodeord: ");
-                accountLogin(username,password);
-                //if(accountLogin(username,password)){
-                // mainMenu();
-                // }
+
+                if(accountLogin(username,password)){
+                    Account a = new Account(username, password);
+                    MainMenu m = new MainMenu();
+                    m.chooseUser(a);
+                 }
 
                 break;
             case 2:
@@ -33,37 +35,40 @@ public class StartMenu {
         }
     }
 
-    private void createAccount(String username, String password) {
+    private void createAccount(String accountName, String password) {
         accData = io.readData("data/accountDetails.csv");
 
         for (int i = 0; i < accData.size(); i++) {
             String[] values = accData.get(i).split(";");
             String newUserName = values[0];
-            if (newUserName.equalsIgnoreCase(username)) {
+            if (newUserName.equalsIgnoreCase(accountName)) {
                 ui.displayMessage("Brugernavn eksisterer allerede, prøv igen.");
-                username = ui.promptText("Skriv nyt Brugernavn: ");
-                this.createAccount(username, password);
+                accountName = ui.promptText("Skriv nyt Brugernavn: ");
+                this.createAccount(accountName, password);
                 return;
             }
         }
-        Account a = new Account(username, password);
+        Account a = new Account(accountName, password);
         ui.displayMessage("Konto oprettet!");
+        String Username = ui.promptText("Ingen brugere fundet, opret ny med følgende navn: ");
+        a.createUser(Username);
+
         a.addAccount(a);
 
     }
 
-    public boolean accountLogin(String username, String password){
+    public boolean accountLogin(String accountName, String password){
         accData = io.readData("data/accountDetails.csv");
 
         while (true) {
             for (String line : accData) {
                 String[] values = line.split(";");
-                if (values.length < 2) continue; // Safety check to avoid index errors if csv file is missing values on line ( username;password, where one could be missing, then it skips that line and moves on to the next)
+                if (values.length < 2) continue; // Safety check to avoid index errors if csv file is missing values on line ( accountName;password, where one could be missing, then it skips that line and moves on to the next)
 
                 String searchUsername = values[0];
                 String searchPassword = values[1];
 
-                if (searchUsername.equalsIgnoreCase(username) && searchPassword.equals(password)) {
+                if (searchUsername.equalsIgnoreCase(accountName) && searchPassword.equals(password)) {
                     ui.displayMessage("Korrekt! Logger ind...");
                     return true;
                 }
@@ -74,10 +79,10 @@ public class StartMenu {
 
             // while true, creates infinite loop, until a return is made (return true;)
 
-            username = ui.promptText("Brugernavn: ");
+            accountName = ui.promptText("Brugernavn: ");
             password = ui.promptText("Kodeord: ");
 
-            if (accountLogin(username, password)) {
+            if (accountLogin(accountName, password)) {
                 return true;
             }
         }

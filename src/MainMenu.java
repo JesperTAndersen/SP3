@@ -1,4 +1,8 @@
 public class MainMenu {
+TextUI ui = new TextUI();
+
+    public MainMenu() {
+    }
 
     public void displayOptions(){
 
@@ -12,7 +16,8 @@ public class MainMenu {
 
     }
 
-    private void changeUser(){
+    public void chooseUser(Account a){
+        a.showUsers();
 
     }
 
