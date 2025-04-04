@@ -19,6 +19,10 @@ public class StartMenu {
                 username = ui.promptText("Indtast Brugernavn: ");
                 password = ui.promptText("Indtast Kodeord: ");
                 accountLogin(username,password);
+                //if(accountLogin(username,password)){
+                // mainMenu();
+                // }
+
                 break;
             case 2:
                 username = ui.promptText("Indtast Brugernavn: ");
