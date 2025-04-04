@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.ArrayList;
 
 public class StartMenu {
@@ -8,45 +7,88 @@ public class StartMenu {
     private ArrayList<String> accData;
 
 
-    void login(){
+    public void runChill(){
         ui.displayMessage("Velkommen til Chill");
-        int userChoice = ui.promptNumeric("1. Login \n2. Opret Konto \n");
+        int userChoice = ui.promptNumeric("1. Login\n2. Opret Konto");
 
+        String username = ui.promptText("Indtast Brugernavn: ");
+        String password = ui.promptText("Indtast Kodeord: ");
 
         switch (userChoice){
             case 1:
-
-                    String username = ui.promptText("Indtast Brugernavn: ");
-                    String password = ui.promptText("Indtast Password: ");
-
-
-
-            case 2:
-                username = ui.promptText("Indtast Brugernavn: ");
-                password = ui.promptText("Indtast Password: ");
-                createAccount(username, password);
-
-
+                if(accountLogin(username,password)){
+                    this.loginSucces(username, password);
+                 }
                 break;
 
+            case 2:
+                createAccount(username, password);
+                this.loginSucces(username, password);
+                break;
         }
+
     }
 
-    public void createAccount(String username, String password){
+    private void createAccount(String accountName, String password) {
         accData = io.readData("data/accountDetails.csv");
 
         for (int i = 0; i < accData.size(); i++) {
             String[] values = accData.get(i).split(";");
             String newUserName = values[0];
-            if (newUserName.equalsIgnoreCase(username)){
+            if (newUserName.equalsIgnoreCase(accountName)) {
                 ui.displayMessage("Brugernavn eksisterer allerede, prøv igen.");
-                username = ui.promptText("Skriv nyt Brugernavn: ");
-                this.createAccount(username, password);
-            } else {
-                Account a = new Account(username, password);
-                ui.displayMessage("Konto oprettet!");
-                a.addAccount(a);
+                accountName = ui.promptText("Skriv nyt Brugernavn: ");
+                this.createAccount(accountName, password);
+                return;
             }
         }
+        Account a = new Account(accountName, password);
+        ui.displayMessage("Konto oprettet!");
+
+        a.createUser(ui.promptText("Ingen brugere fundet, opret ny med følgende navn: "));
+
+        // tilføj flere users før account create?
+        a.addAccount(a);
+
+    }
+
+    public boolean accountLogin(String accountName, String password){
+        accData = io.readData("data/accountDetails.csv");
+
+        while (true) {
+            for (String line : accData) {
+                String[] values = line.split(";");
+                if (values.length < 2) continue; // Safety check to avoid index errors if csv file is missing values on line ( accountName;password, where one could be missing, then it skips that line and moves on to the next)
+
+                String searchUsername = values[0];
+                String searchPassword = values[1];
+
+                if (searchUsername.equalsIgnoreCase(accountName) && searchPassword.equals(password)) {
+                    ui.displayMessage("Korrekt! Logger ind...");
+                    return true;
+                }
+            }
+
+            // If no match was found, prompt error message and run the while loop until accountLogin returns true
+            ui.displayMessage("Brugernavn eller kodeord er forkert! .. Prøv igen");
+
+            // while true, creates infinite loop, until a return is made (return true;)
+
+            accountName = ui.promptText("Brugernavn: ");
+            password = ui.promptText("Kodeord: ");
+
+            if (accountLogin(accountName, password)) {
+                return true;
+            }
+        }
+
+
+    }
+
+    public void loginSucces(String username, String password){
+        Account a = new Account(username, password);
+        MainMenu m = new MainMenu();
+        m.displayOptions(a);
     }
 }
+

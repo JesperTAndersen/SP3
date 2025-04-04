@@ -4,13 +4,13 @@ public class Account {
     FileIO io = new FileIO();
     TextUI ui = new TextUI();
 
-    private String username;
+    private String accountName;
     private String password;
-    private ArrayList<User> users;
+    private ArrayList<User> users = new ArrayList<>();
     private ArrayList<Account> accounts = new ArrayList<>();
 
-    Account(String username, String password){
-        this.username = username;
+    Account(String accountName, String password){
+        this.accountName = accountName;
         this.password = password;
     }
 
@@ -25,15 +25,53 @@ public class Account {
 
         io.saveData(accountData,"data/accountDetails.csv", "username;password;users");
     }
+    
+    public int chooseUser(){
+
+        ArrayList<String> userData = new ArrayList<>();
+
+        userData = io.readData("data/accountDetails.csv");
+
+        for (int i = 0; i < userData.size(); i++) {
+            String[] values = userData.get(i).split(";");
+            String searchAccount = values[0];
+            if(this.accountName.equalsIgnoreCase(searchAccount)){
+                //This part of the code removes the [] from the user array..
+                String[] userList;
+                String value = values[2];
+                userList = value.substring(1, value.length()-1).split(",");
+
+                int count = 1;
+                for (String u : userList) {
+                    User user = new User(u);
+                    System.out.println(count +". " + u);
+                    count++;
+                }
+
+                return ui.promptNumeric("vælg bruger: ");
+            }
+        }
+        return 0;
+    }
 
     public User getUsers(){
         for (User u : users){
             return u;
-        } return null;
+        }return null;
     }
+
 
     @Override
     public String toString() {
-        return this.username +";"+ this.password +";"+ this.users;
+        return this.accountName +";"+ this.password +";"+ this.users.toString();
     }
-}
+
+    public void createUser(String name) {
+
+        User newUser = new User(name);
+        users.add(newUser);
+            
+
+        }
+
+    }

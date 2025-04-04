@@ -4,8 +4,9 @@
 !pragma layout smetana
 
 class StartMenu {
-- ArrayList<Account>
+- ArrayList<String> accData;
 + void login ()
+- void createAccount()
 
 }
 class MainMenu {
@@ -20,10 +21,12 @@ class Account {
 - String username
 - String password
 - ArrayList<User>
+- ArrayList<Account>
+
 
 + Account(String username, String password)
-+ void createAccount()
 + void getUsers()
++ String toString()
 }
 
 class User {

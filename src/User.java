@@ -31,5 +31,8 @@ public class User {
         return this.myList;
     }
 
-
+    @Override
+    public String toString() {
+        return this.name+ ",";
+    }
 }
