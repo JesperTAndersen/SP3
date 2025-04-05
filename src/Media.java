@@ -12,4 +12,9 @@ public abstract class Media {
     private void exitOptions(){
 
     }
+
+    @Override
+    public String toString() {
+        return name + ", Rated: " + imdbRating + " on IMDB.";
+    }
 }
