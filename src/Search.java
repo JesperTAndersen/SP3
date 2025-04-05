@@ -9,13 +9,18 @@ public class Search {
     public void searchOptions(){
 
     }
-    private void searchByText(){
+    private void searchByText(String searchByText){
+        this.seriesLoad();
+
+
 
     }
     private void searchMovie(){
 
     }
     public void searchSeries(){
+
+        this.seriesLoad();
 
         int count = 1;
         for (Series s : seriesList){
@@ -29,10 +34,13 @@ public class Search {
     }
 
     public ArrayList<Series> seriesLoad(){
-        ArrayList<String> seriesData = new ArrayList<>();
-        seriesData = io.readData("data/series.txt");
+
+        ArrayList<String> seriesData = io.readData("data/series.txt");
+
         for (int i = 0; i < seriesData.size(); i++){
+
             String[] series = seriesData.get(i).split(";");
+
             String serieName = series[0];
             String releaseYear = series[1].trim();
             String genre = series[2].trim();
@@ -41,7 +49,6 @@ public class Search {
 
             Series s = new Series(serieName,releaseYear,genre,imdbRating,seasonsEpisodes);
             seriesList.add(s);
-            System.out.println(s);
         }
         return seriesList;
     }
