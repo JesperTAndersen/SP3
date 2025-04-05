@@ -29,17 +29,19 @@ public class Search {
     }
 
     public ArrayList<Series> seriesLoad(){
-        ArrayList<String> seriesData = io.readData("series.txt");
+        ArrayList<String> seriesData = new ArrayList<>();
+        seriesData = io.readData("data/series.txt");
         for (int i = 0; i < seriesData.size(); i++){
             String[] series = seriesData.get(i).split(";");
             String serieName = series[0];
             String releaseYear = series[1].trim();
             String genre = series[2].trim();
-            float imdbRating = Integer.parseInt(series[3].trim());
+            String imdbRating = series[3].trim();
             String seasonsEpisodes = series[4].trim();
 
             Series s = new Series(serieName,releaseYear,genre,imdbRating,seasonsEpisodes);
             seriesList.add(s);
+            System.out.println(s);
         }
         return seriesList;
     }

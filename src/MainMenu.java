@@ -5,7 +5,7 @@ TextUI ui = new TextUI();
     public void displayOptions(Account a){
         a.chooseUser();
         Search s = new Search();
-
+        s.seriesLoad();
         /*
         int userChoice = ui.prompnumeric("Vælg menu")
         ui.displaymessage(""):

@@ -7,12 +7,12 @@ public class Series extends Media{
     String name;
     String releaseYear;
     String genre;
-    float imdbRating;
+    String imdbRating;
     String seriesSeasons;
 
     ArrayList<String> seriesList;
 
-    public Series(String name, String releaseYear, String genre, float imdbRating, String seriesSeasons) {
+    public Series(String name, String releaseYear, String genre, String imdbRating, String seriesSeasons) {
         this.name = name;
         this.releaseYear = releaseYear;
         this.genre = genre;
