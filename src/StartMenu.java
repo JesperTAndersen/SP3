@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class StartMenu {
     TextUI ui = new TextUI();
     FileIO io = new FileIO();
+    private String accountName;
 
     private ArrayList<String> accData;
 
@@ -11,19 +12,19 @@ public class StartMenu {
         ui.displayMessage("Velkommen til Chill");
         int userChoice = ui.promptNumeric("1. Login\n2. Opret Konto");
 
-        String username = ui.promptText("Indtast Brugernavn: ");
+        String accountName = ui.promptText("Indtast Brugernavn: ");
         String password = ui.promptText("Indtast Kodeord: ");
 
         switch (userChoice){
             case 1:
-                if(accountLogin(username,password)){
-                    this.loginSucces(username, password);
+                if(accountLogin(accountName,password)){
+                    this.loginSucces(this.accountName, password);
                  }
                 break;
 
             case 2:
-                createAccount(username, password);
-                this.loginSucces(username, password);
+                createAccount(accountName, password);
+                this.loginSucces(this.accountName, password);
                 break;
         }
 
@@ -65,28 +66,23 @@ public class StartMenu {
 
                 if (searchUsername.equalsIgnoreCase(accountName) && searchPassword.equals(password)) {
                     ui.displayMessage("Korrekt! Logger ind...");
+                    this.accountName = searchUsername;
                     return true;
                 }
             }
 
-            // If no match was found, prompt error message and run the while loop until accountLogin returns true
+            // If no match was found, prompt error message and run the while loop until accountLogin returns true..
             ui.displayMessage("Brugernavn eller kodeord er forkert! .. Prøv igen");
-
-            // while true, creates infinite loop, until a return is made (return true;)
-
+            //Prompts the user for accountname and password again to run back into the while loop
             accountName = ui.promptText("Brugernavn: ");
             password = ui.promptText("Kodeord: ");
 
-            if (accountLogin(accountName, password)) {
-                return true;
-            }
         }
-
 
     }
 
-    public void loginSucces(String username, String password){
-        Account a = new Account(username, password);
+    public void loginSucces(String accountName, String password){
+        Account a = new Account(accountName, password);
         MainMenu m = new MainMenu();
         m.displayOptions(a);
     }
