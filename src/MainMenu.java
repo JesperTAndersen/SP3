@@ -1,36 +1,52 @@
 public class MainMenu {
-TextUI ui = new TextUI();
+    TextUI ui = new TextUI();
 
 
-    public void displayOptions(Account a){
-        a.chooseUser();
-        /*
-        int userChoice = ui.prompnumeric("Vælg menu")
-        ui.displaymessage(""):
-        1. "søg"
-        2 "Min liste"
-        3 "Sete film"
-        4 "logout"
+    public void displayOptions(Account acc, User user) {
 
-        switch case:
-        case 1:
-            searchOptions;
-        case 2:
-            myList();
-         */
+        int userChoice = ui.promptNumeric("1. Søg Film & Serier.\n2. Min Liste.\n3. Sete Film.\n4. Log ud.");
+        switch (userChoice) {
+            case 1:
+                Search s = new Search();
+                s.searchOptions(user);
+                displayOptions(acc, user);
+                break;
+
+            case 2:
+                myList(acc,user);
+                displayOptions(acc, user);
+                break;
+
+            case 3:
+                haveWatchedList(acc, user);
+                displayOptions(acc, user);
+                break;
+
+            case 4:
+                //Log ud..
+                break;
+
+            default:
+                ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
+                displayOptions(acc, user);
+        }
     }
 
-    private void myList(){
-        //Gennemløber csv fil for account, user og index plads 3 (0,1,2)
-        //Som viser listen over brugerens "vil se liste"
+    private void myList(Account acc, User user){
+        ui.displayMessage("Din Liste: ");
+        System.out.println(user.getMyList());
     }
 
-    private void haveWatchedList(){
-        //Gennemløber csv fil for account, user og index plads 4 (0,1,2,3)
-        //Som viser listen over brugerens "har set"
+    private void haveWatchedList(Account acc, User user){
+        ui.displayMessage("Din Sete Film: ");
+        System.out.println(user.getHaveWatched());
+        }
+/*
+    private void logout(Account acc, User user){
+
     }
 
-    private void logout(){
+ */
 
     }
-}
+

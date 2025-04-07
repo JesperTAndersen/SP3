@@ -23,6 +23,14 @@ public class User {
         return this.isKid;
     }
 
+    public void addToHaveWatched(String mediaName) {
+        this.haveWatched.add(mediaName);
+    }
+
+    public void addMyList(String mediaName) {
+        this.myList.add(mediaName);
+    }
+
     public ArrayList<String> getHaveWatched() {
         return this.haveWatched;
     }
