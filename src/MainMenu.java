@@ -23,7 +23,7 @@ public class MainMenu {
                 break;
 
             case 4:
-                //Log ud
+                //Log ud..
                 break;
 
             default:
