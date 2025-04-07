@@ -20,7 +20,6 @@ public class StartMenu {
                 accountName = ui.promptText("Indtast Brugernavn: ");
                 password = ui.promptText("Indtast Kodeord: ");
                 loginSucces(accountLogin(accountName, password), password);
-
                 break;
 
             case 2:
@@ -89,12 +88,14 @@ public class StartMenu {
 
     public void loginSucces(Account acc) {
         MainMenu m = new MainMenu();
-        m.displayOptions(acc);
+        User user = acc.chooseUser(acc);
+        m.displayOptions(acc, user);
     }
 
     public void loginSucces(String accountName, String password) {
-        Account a = new Account(accountName, password);
+        Account acc = new Account(accountName, password);
         MainMenu m = new MainMenu();
-        m.displayOptions(a);
+        User user = acc.chooseUser(acc);
+        m.displayOptions(acc, user);
     }
 }
