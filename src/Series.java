@@ -4,11 +4,11 @@ public class Series extends Media{
     TextUI ui = new TextUI();
     FileIO io = new FileIO();
 
-    String name;
-    String releaseYear;
-    String genre;
-    String imdbRating;
-    String seriesSeasons;
+    private String name;
+    private String releaseYear;
+    private String genre;
+    private String imdbRating;
+    private String seriesSeasons;
 
     ArrayList<String> seriesList;
 

@@ -3,10 +3,31 @@ TextUI ui = new TextUI();
 
 
     public void displayOptions(Account a){
-        a.chooseUser();
-        Search s = new Search();
-        //s.seriesLoad();
-        s.searchSeries();
+        User currentUser = a.chooseUser(a);
+
+        int userChoice = ui.promptNumeric("1. Søg Film & Serier.\n2. Min Liste.\n3. Sete Film.\n4. Log ud.");
+        switch (userChoice) {
+            case 1:
+                Search s = new Search();
+                s.searchOptions();
+                break;
+
+            case 2:
+
+                break;
+
+            case 3:
+
+                break;
+
+            case 4:
+
+                break;
+
+            default:
+                ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
+                displayOptions(a);
+
         /*
         int userChoice = ui.prompnumeric("Vælg menu")
         ui.displaymessage(""):
