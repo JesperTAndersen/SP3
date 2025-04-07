@@ -10,6 +10,7 @@ public class Search {
     ArrayList<Movie> moviesList = new ArrayList<>();
 
     public void searchOptions(User user) {
+        ui.displayMessage("** Søge menu **");
         int userChoice = ui.promptNumeric("1. Søg alle Film.\n2. Søg alle Serier.\n3. Søg Alle.\n4. Søg Genrer.");
         switch (userChoice) {
             case 1:
@@ -17,6 +18,8 @@ public class Search {
                 //Switch-ception
 
                 String movieChoice = searchMovie();
+
+                ui.displayMessage("** Medie muligheder **");
 
                 int userChoice1 = ui.promptNumeric("1. Se Film.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
                 switch (userChoice1) {
@@ -45,6 +48,8 @@ public class Search {
                 String seriesChoice = searchSeries();
 
                 //Start of Switch-ception.. AGAIN!
+
+                ui.displayMessage("** Medie muligheder **");
 
                 int userChoice2 = ui.promptNumeric("1. Se Serie.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
                 switch (userChoice2) {
