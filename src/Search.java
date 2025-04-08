@@ -77,6 +77,9 @@ public class Search {
 
             case 3:
                 String mediaChoice = searchByText();
+
+                ui.displayMessage("** Medie muligheder **");
+                
                 int userChoice3 = ui.promptNumeric("1. Se Film/Serie.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
                 switch (userChoice3) {
                     case 1:

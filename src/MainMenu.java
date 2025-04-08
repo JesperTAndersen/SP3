@@ -4,7 +4,6 @@ public class MainMenu {
     TextUI ui = new TextUI();
     FileIO io = new FileIO();
 
-
     public void displayOptions(Account acc, User user) {
         ui.displayMessage("** Hovedmenu **");
         int userChoice = ui.promptNumeric("1. Søg Film & Serier.\n2. Min Liste.\n3. Sete Film.\n4. Log ud.");
@@ -16,7 +15,7 @@ public class MainMenu {
                 break;
 
             case 2:
-                myList(acc,user);
+                myList(acc, user);
                 displayOptions(acc, user);
                 break;
 
@@ -26,7 +25,7 @@ public class MainMenu {
                 break;
 
             case 4:
-                //Log ud..
+                logout(acc,user);
                 break;
 
             default:
@@ -35,31 +34,93 @@ public class MainMenu {
         }
     }
 
-    private void myList(Account acc, User user){
+    private void myList(Account acc, User user) {
         ui.displayMessage("Din Liste: ");
-        for (String s : user.getMyList()){
+        for (String s : user.getMyList()) {
             System.out.println(s);
         }
-
     }
 
-    private void haveWatchedList(Account acc, User user){
+    private void haveWatchedList(Account acc, User user) {
         ui.displayMessage("Din Sete Film: ");
-        for (String s : user.getHaveWatched()){
+        for (String s : user.getHaveWatched()) {
             System.out.println(s);
         }
     }
 
-    private void logout(Account acc, User user){
+    private void logout(Account acc, User user) {
         ArrayList<String> userDetails = io.readData("data/userDetails.csv");
 
-        for (int i = 0; i < userDetails.size(); i++){
-            //Gennemløbe array her og træk  værdier ud til variabler
-            //Derefter bland dem sammen med værdier fra myList og HaveWatchedList hvor end de skal hen og derefter lav en io.write
+        int count = 0;
+        String tekst = "";
+        boolean userFound = false;
+
+        for (int i = 0; i < userDetails.size(); i++) {
+            String[] values = userDetails.get(i).split(";");
+            if (acc.getAccountName().equals(values[0]) && user.getName().equals(values[1])) {
+
+                //Takes haveWatched and makes to a string
+                String haveWatchedStrTmp = String.join(",", user.getHaveWatched());
+                values[2] = haveWatchedStrTmp;
+
+                String myListStrTmp = String.join(",", user.getMyList());
+                values[3] = myListStrTmp;
+
+                String test = acc.getAccountName() + ";" + user.getName() + ";" + values[2] + ";" + values[3];
+                count = i;
+                tekst = test;
+
+                userFound = true;
+                break;
+
+            }else {
+                //Takes haveWatched and makes to a string
+                String haveWatchedStrTmp = String.join(",", user.getHaveWatched());
+                values[2] = haveWatchedStrTmp;
+
+                String myListStrTmp = String.join(",", user.getMyList());
+                values[3] = myListStrTmp;
+
+                String test = acc.getAccountName() + ";" + user.getName() + ";" + values[2] + ";" + values[3];
+
+                tekst = test;
+            }
         }
+
+        if (userFound){
+            userDetails.set(count, tekst);
+        } else {
+            userDetails.add(tekst);
+        }
+
+        io.saveUserData(userDetails, "data/userDetails.csv", "accountName;userName;HaveWatchedList;myList");
     }
 
+        public void readUserDetails (Account acc, User user){
+            ArrayList<String> userDetails = io.readData("data/userDetails.csv");
 
+            for (int i = 0; i < userDetails.size(); i++) {
+                String[] values = userDetails.get(i).split(";");
+                if (acc.getAccountName().equals(values[0]) && user.getName().equals(values[1])) {
 
+                    String haveWatchedList = values[2];
+                    String myList = values[3];
+
+                    String[] haveWatchedSeperated = haveWatchedList.split(",");
+                    String[] myListSeperated = myList.split(",");
+
+                    for (String s : haveWatchedSeperated) {
+                        user.addToHaveWatched(s);
+                    }
+                    for (String s : myListSeperated) {
+                        user.addMyList(s);
+                    }
+                }
+            }
+        }
 }
+
+
+
+
 

@@ -89,6 +89,7 @@ public class StartMenu {
     public void loginSucces(Account acc) {
         MainMenu m = new MainMenu();
         User user = acc.chooseUser(acc);
+        m.readUserDetails(acc,user);
         m.displayOptions(acc, user);
     }
 
@@ -96,6 +97,8 @@ public class StartMenu {
         Account acc = new Account(accountName, password);
         MainMenu m = new MainMenu();
         User user = acc.chooseUser(acc);
+        m.readUserDetails(acc, user);
         m.displayOptions(acc, user);
     }
+
 }

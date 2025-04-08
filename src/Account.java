@@ -71,4 +71,8 @@ public class Account {
         User newUser = new User(name);
         users.add(newUser);
         }
+
+    public String getAccountName(){
+        return this.accountName;
     }
+}
