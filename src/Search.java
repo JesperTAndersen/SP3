@@ -132,6 +132,8 @@ public class Search {
                 ui.displayList(results, "Resultater:");
             }
             int userChoice = ui.promptNumeric("Vælg en Film eller Serie på listen: ");
+
+            userChoice = ui.promptIfNumCheck(userChoice,results.size());
             return results.get(userChoice-1);
     }
 
@@ -144,6 +146,8 @@ public class Search {
         }
 
         int userChoice = ui.promptNumeric("Vælg en film på listen: ");
+
+        userChoice = ui.promptIfNumCheck(userChoice,moviesList.size());
         return moviesList.get(userChoice-1).getName();
 
     }
@@ -155,6 +159,7 @@ public class Search {
             count++;
         }
         int userChoice = ui.promptNumeric("Vælg en serie på listen: ");
+        userChoice = ui.promptIfNumCheck(userChoice, seriesList.size());
         return seriesList.get(userChoice-1).getName();
 
     }

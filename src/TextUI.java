@@ -77,4 +77,12 @@ public class TextUI {
     public void displayMessage(String msg) {
         System.out.println("\n"+msg);
     }
+
+    public int promptIfNumCheck(int x, int y){
+        if(x > y||x<=0){
+            return promptIfNumCheck(promptNumeric("Ugyldigt valg prøv igen: "),y);
+        }
+        return x;
+    }
 }
+

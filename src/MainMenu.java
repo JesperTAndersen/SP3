@@ -48,6 +48,13 @@ public class MainMenu {
                 System.out.println(count +". "+ s);
             }
             int userChoiceNum = ui.promptNumeric("Vælg hvilken film/serie du vil se fra din liste: ");
+
+            /*if(userChoiceNum > user.getMyList().size()||userChoiceNum<0){
+                userChoiceNum = ui.promptNumeric("Ugyldigt valg prøv igen: ");
+            }*/
+
+            //linjen tjekker om userChoiceNum er større end listen's størrelse eller om userChoiceNum er mindre end 0
+            userChoiceNum = ui.promptIfNumCheck(userChoiceNum,user.getMyList().size());
             m.playMedia(user, user.getMyList().get(userChoiceNum - 1));
         }
     }
