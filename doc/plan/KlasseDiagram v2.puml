@@ -1,0 +1,103 @@
+@startuml
+class Movie {
+  - String name
+  - int releaseYear
+  - ArrayList<String> genre
+  - int ageRating
+  - int duration
+  + String getName()
+  + int getReleaseYear()
+  + ArrayList<String> getGenre()
+  + int getAgeRating()
+  + int getDuration()
+}
+
+class Series {
+  - String name
+  - int releaseYear
+  - ArrayList<String> genre
+  - int ageRating
+  - int seasons
+  + String getName()
+  + int getReleaseYear()
+  + ArrayList<String> getGenre()
+  + int getAgeRating()
+  + int getSeasons()
+}
+
+class Media {
+  - String name
+  - int releaseYear
+  - ArrayList<String> genre
+  - int ageRating
+}
+
+Movie <|-- Media
+Series <|-- Media
+
+class User {
+  - String name
+  - int age
+  - ArrayList<String> haveWatched
+  - ArrayList<String> myList
+  + String getName()
+  + int getAge()
+  + ArrayList<String> getHaveWatched()
+  + ArrayList<String> getMyList()
+}
+
+class Account {
+  - ArrayList<User> users
+  + void addUser(User user)
+  + ArrayList<User> getUsers()
+}
+
+Account *-- User
+User --> Media
+
+class Search {
+  - ArrayList<Series> seriesList
+  - ArrayList<Movie> moviesList
+  - TextUI ui
+  + void searchByName(String name)
+  + void filterByGenre(String genre)
+  + void filterByAgeRating(int age)
+  + void filterByReleaseYear(int year)
+}
+
+Search *-- Movie
+Search *-- Series
+Search *-- TextUI
+
+class FileIO {
+  + ArrayList<Series> loadSeries()
+  + ArrayList<Movie> loadMovies()
+}
+
+class TextUI {
+  + void showMessage(String msg)
+  + String getInput()
+}
+
+class StartMenu {
+  - TextUI ui
+  - FileIO fileIO
+  + void showStartMenu()
+}
+
+StartMenu --> FileIO
+StartMenu --> TextUI
+StartMenu <-- MainMenu
+
+class MainMenu {
+  - TextUI ui
+  - Search search
+  - User currentUser
+  + void showMainMenu()
+}
+
+MainMenu --> TextUI
+MainMenu --> Search
+MainMenu --> User
+
+@enduml

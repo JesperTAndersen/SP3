@@ -71,8 +71,29 @@ public class Search {
                 break;
 
             case 3:
+                String mediaChoice = searchByText();
+                int userChoice3 = ui.promptNumeric("1. Se Film/Serie.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
+                switch (userChoice3) {
+                    case 1:
+                        series.playMedia(user, mediaChoice);
+                        break;
+
+                    case 2:
+                        user.addMyList(mediaChoice);
+                        break;
+
+                    case 3:
+                        searchOptions(user);
+                        break;
+
+                    default:
+                        ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
+                        searchOptions(user);
+                }
+                break;
 
             case 4:
+                //I case 4 laves søgefunktionen til genre.
 
             default:
                 ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
@@ -80,12 +101,32 @@ public class Search {
 
         }
     }
-    private void searchByText(String searchByText){
-        this.seriesLoad();
+    private String searchByText(){
+            String textSearch =  ui.promptText("Indtast Søgeord");
+            ui.displayMessage("Søger efter: " + textSearch);
+            ArrayList<String> results = new ArrayList<>();
 
+            for (Movie m : moviesLoad()) {
+                if (m.getName().toLowerCase().contains(textSearch.toLowerCase())) {
+                    results.add("Film: " + m.toString());
+                }
+            }
 
+            for (Series s : seriesLoad()) {
+                if (s.getName().toLowerCase().contains(textSearch.toLowerCase())) {
+                    results.add("Serie: " + s.toString());
+                }
+            }
 
+            if (results.isEmpty()) {
+                ui.displayMessage("Ingen resultater fundet.");
+            } else {
+                ui.displayList(results, "Resultater:");
+            }
+            int userChoice = ui.promptNumeric("Vælg en Film eller Serie på listen: ");
+            return results.get(userChoice-1);
     }
+
     private String searchMovie(){
 
         int count = 1;
