@@ -93,7 +93,7 @@ public class MainMenu {
             userDetails.add(tekst);
         }
 
-        io.saveUserData(userDetails, "data/userDetails.csv", "accountName;userName;HaveWatchedList;myList");
+        io.saveData(userDetails, "data/userDetails.csv", "accountName;userName;HaveWatchedList;myList", false);
     }
 
         public void readUserDetails (Account acc, User user){

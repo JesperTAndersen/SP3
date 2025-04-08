@@ -22,7 +22,7 @@ public class Account {
             String s = b.toString();
             accountData.add(s);
         }
-        io.saveData(accountData,"data/accountDetails.csv", "username;password;users");
+        io.saveData(accountData,"data/accountDetails.csv", "username;password;users", true);
     }
     
     public User chooseUser(Account account){

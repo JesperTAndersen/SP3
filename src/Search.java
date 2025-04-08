@@ -11,9 +11,34 @@ public class Search {
 
     public void searchOptions(User user) {
         ui.displayMessage("** Søge menu **");
-        int userChoice = ui.promptNumeric("1. Søg alle Film.\n2. Søg alle Serier.\n3. Søg Alle.\n4. Søg Genrer.");
+        int userChoice = ui.promptNumeric("1. Søg blandt Film & Serier.\n2. Film Katalog.\n3. Series Katalog.\n4. Søg Genrer.");
         switch (userChoice) {
             case 1:
+                String mediaChoice = searchByText();
+
+                ui.displayMessage("** Medie muligheder **");
+
+                int userChoice3 = ui.promptNumeric("1. Se Film/Serie.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
+                switch (userChoice3) {
+                    case 1:
+                        series.playMedia(user, mediaChoice);
+                        break;
+
+                    case 2:
+                        user.addMyList(mediaChoice);
+                        break;
+
+                    case 3:
+                        searchOptions(user);
+                        break;
+
+                    default:
+                        ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
+                        searchOptions(user);
+                }
+                break;
+
+            case 2:
 
                 //Switch-ception
 
@@ -44,7 +69,7 @@ public class Search {
 
                 break;
 
-            case 2:
+            case 3:
                 String seriesChoice = searchSeries();
 
                 //Start of Switch-ception.. AGAIN!
@@ -73,31 +98,6 @@ public class Search {
 
                 //End of switch-ception.. AGAIN! :P
 
-                break;
-
-            case 3:
-                String mediaChoice = searchByText();
-
-                ui.displayMessage("** Medie muligheder **");
-                
-                int userChoice3 = ui.promptNumeric("1. Se Film/Serie.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
-                switch (userChoice3) {
-                    case 1:
-                        series.playMedia(user, mediaChoice);
-                        break;
-
-                    case 2:
-                        user.addMyList(mediaChoice);
-                        break;
-
-                    case 3:
-                        searchOptions(user);
-                        break;
-
-                    default:
-                        ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
-                        searchOptions(user);
-                }
                 break;
 
             case 4:
@@ -163,8 +163,8 @@ public class Search {
     }
 
     public ArrayList<Series> seriesLoad(){
-
         ArrayList<String> seriesData = io.readData("data/series.txt");
+        seriesList.clear();
 
         for (int i = 0; i < seriesData.size(); i++){
 
@@ -184,6 +184,7 @@ public class Search {
 
     private ArrayList<Movie> moviesLoad(){
         ArrayList<String> movieData = io.readData("data/movies.txt");
+        moviesList.clear();
 
         for (int i = 0; i < movieData.size(); i++){
             String[] movies = movieData.get(i).split(";");

@@ -7,9 +7,9 @@ import java.util.Scanner;
 
 public class FileIO {
 
-    public void saveData(ArrayList<String> list, String path, String header){
+    public void saveData(ArrayList<String> list, String path, String header, boolean append){
         try {
-            FileWriter writer = new FileWriter(path, true); //append = false makes so it overwrites instead.
+            FileWriter writer = new FileWriter(path, append); //append = false makes so it overwrites instead.
             File file = new File(path);
             boolean fileExists = file.exists();
             boolean fileIsEmpty = file.length() == 0;
@@ -26,27 +26,6 @@ public class FileIO {
             System.out.println("problem: "+ e.getMessage());
         }
     }
-
-    public void saveUserData(ArrayList<String> list, String path, String header){
-        try {
-            FileWriter writer = new FileWriter(path, false); //append = false makes so it overwrites instead.
-            File file = new File(path);
-            boolean fileExists = file.exists();
-            boolean fileIsEmpty = file.length() == 0;
-
-            if (!fileExists || fileIsEmpty) {
-                writer.write(header + "\n"); // Write header if file is new or empty
-            }
-
-            for (String s : list) {
-                writer.write(s+"\n");
-            }
-            writer.close();
-        }catch (IOException e) {
-            System.out.println("problem: "+ e.getMessage());
-        }
-    }
-
 
     public ArrayList<String> readData(String path) {
         ArrayList<String> data = new ArrayList<>();
