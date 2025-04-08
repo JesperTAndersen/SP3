@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class MainMenu {
     TextUI ui = new TextUI();
     FileIO io = new FileIO();
-
+    Media m = new Movie();
     public void displayOptions(Account acc, User user) {
         ui.displayMessage("** Hovedmenu **");
         int userChoice = ui.promptNumeric("1. Søg Film & Serier.\n2. Min Liste.\n3. Sete Film.\n4. Log ud.");
@@ -38,6 +38,17 @@ public class MainMenu {
         ui.displayMessage("Din Liste: ");
         for (String s : user.getMyList()) {
             System.out.println(s);
+        }
+        boolean userChoiceYN = ui.promptBinary("Vil du se en film/serie fra listen Y/N: ");
+        if (userChoiceYN) {
+            ui.displayMessage("Her får du din liste igen: ");
+            int count = 0;
+            for (String s : user.getMyList()) {
+                count++;
+                System.out.println(count +". "+ s);
+            }
+            int userChoiceNum = ui.promptNumeric("Vælg hvilken film/serie du vil se fra din liste: ");
+            m.playMedia(user, user.getMyList().get(userChoiceNum - 1));
         }
     }
 
