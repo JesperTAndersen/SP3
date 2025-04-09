@@ -64,9 +64,6 @@ public class StartMenu {
             }
 
         }
-
-
-        // tilføj flere users før account create?
         a.addAccount(a);
         return a;
     }

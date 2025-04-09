@@ -19,8 +19,6 @@ public class Account {
         ArrayList<String> accountData = new ArrayList<>();
         ArrayList<String> userDetails = new ArrayList<>();
 
-        //userDetails.add(this.accountName + ";" + getUsers().getName() + ";Dine Sete Film:" + ";Din Liste:");
-
         for(Account b : accounts){
             String s = b.toString();
             accountData.add(s);

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public abstract class Media {
     TextUI ui = new TextUI();
 
@@ -19,10 +17,6 @@ public abstract class Media {
     public void playMedia(User u, String mediaName) {
         u.addToHaveWatched(mediaName);
         ui.displayMessage("Afspiller nu: " + mediaName + "\n" + mediaName + " er tilføjet til sete film & serier");
-
-    }
-
-    private void exitOptions() {
 
     }
 
