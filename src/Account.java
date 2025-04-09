@@ -7,6 +7,7 @@ public class Account {
     private String accountName;
     private String password;
     private ArrayList<User> users = new ArrayList<>();
+    private ArrayList<String> userNames = new ArrayList<>();
     private ArrayList<Account> accounts = new ArrayList<>();
 
     Account(String accountName, String password){
@@ -37,8 +38,7 @@ public class Account {
             if(accountName.equalsIgnoreCase(searchAccount)){
                 String[] userList;
                 String value = values[2];
-                //This part of the code removes the [] from the user array..
-                userList = value.substring(1, value.length()-1).split(",");
+                userList = value.split(",");
 
                 ui.displayMessage("** Oversigt over brugere **");
                 int count = 1;
@@ -55,12 +55,6 @@ public class Account {
         return null;
     }
 
-    public User getUsers(){
-        for (User u : users){
-            return u;
-        }return null;
-    }
-
 
     @Override
     public String toString() {
@@ -75,4 +69,34 @@ public class Account {
     public String getAccountName(){
         return this.accountName;
     }
+
+    public void tmpCreateNewUser(Account acc, String newUsername) {
+        ArrayList<String> accDetails = io.readData("data/accountDetails.csv");
+
+        int count = 0;
+        String csvLine = "";
+
+
+        for (int i = 0; i < accDetails.size(); i++) {
+            String[] values = accDetails.get(i).split(";");
+            if (acc.getAccountName().equals(values[0])) {
+                String tmpName = values[2];
+                String[] userNameList = tmpName.split(",");
+
+                //Takes haveWatched and makes to a string
+                String userList = String.join(",", values[2], newUsername);
+
+                String tempCsvLine = this.accountName + ";" + this.password + ";" + userList;
+                csvLine = tempCsvLine;
+                count = i;
+            }
+
+            accDetails.set(count, csvLine);
+
+
+            io.saveData(accDetails, "data/accountDetails.csv", "username;password;users", false);
+        }
+
+    }
+
 }

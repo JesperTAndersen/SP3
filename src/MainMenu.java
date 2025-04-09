@@ -67,7 +67,7 @@ public class MainMenu {
         ArrayList<String> userDetails = io.readData("data/userDetails.csv");
 
         int count = 0;
-        String tekst = "";
+        String csvLine = "";
         boolean userFound = false;
 
         for (int i = 0; i < userDetails.size(); i++) {
@@ -81,9 +81,9 @@ public class MainMenu {
                 String myListStrTmp = String.join(",", user.getMyList());
                 values[3] = myListStrTmp;
 
-                String test = acc.getAccountName() + ";" + user.getName() + ";" + values[2] + ";" + values[3];
+                String tempCsvLine = acc.getAccountName() + ";" + user.getName() + ";" + values[2] + ";" + values[3];
                 count = i;
-                tekst = test;
+                csvLine = tempCsvLine;
 
                 userFound = true;
                 break;
@@ -96,16 +96,16 @@ public class MainMenu {
                 String myListStrTmp = String.join(",", user.getMyList());
                 values[3] = myListStrTmp;
 
-                String test = acc.getAccountName() + ";" + user.getName() + ";" + values[2] + ";" + values[3];
+                String tmpCsvLine = acc.getAccountName() + ";" + user.getName() + ";" + values[2] + ";" + values[3];
 
-                tekst = test;
+                csvLine = tmpCsvLine;
             }
         }
 
         if (userFound){
-            userDetails.set(count, tekst);
+            userDetails.set(count, csvLine);
         } else {
-            userDetails.add(tekst);
+            userDetails.add(csvLine);
         }
 
         io.saveData(userDetails, "data/userDetails.csv", "accountName;userName;HaveWatchedList;myList", false);

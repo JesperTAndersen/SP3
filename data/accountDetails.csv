@@ -1,5 +1,6 @@
 username;password;users
-Jesper;1234;[Min bruger,JesperBruger,]
-Toby;1234;[tobyBruger,]
-Linus;1234;[LinusBruger,]
-Niko;1234;[NikoUser,]
+Jesper;1234;jesper3,Jesper4,jesper5,test,test2,test23
+Toby;1234;tobyBruger
+Linus;123;Linus
+Niko;1234;NikoUser
+Jesper;1234;[]

@@ -88,6 +88,12 @@ public class StartMenu {
 
     public void loginSucces(Account acc) {
         MainMenu m = new MainMenu();
+        boolean tmp = ui.promptBinary("Vil du oprette ny bruger? Y/N: ");
+        if (tmp){
+            String tmpName = ui.promptText("Skriv nyt brugernavn: ");
+            acc.tmpCreateNewUser(acc,tmpName);
+            acc.addAccount(acc);
+        }
         User user = acc.chooseUser(acc);
         m.readUserDetails(acc,user);
         m.displayOptions(acc, user);
@@ -96,6 +102,12 @@ public class StartMenu {
     public void loginSucces(String accountName, String password) {
         Account acc = new Account(accountName, password);
         MainMenu m = new MainMenu();
+        boolean tmp = ui.promptBinary("Vil du oprette ny bruger? Y/N: ");
+        if (tmp){
+            String tmpName = ui.promptText("Skriv nyt brugernavn: ");
+            acc.tmpCreateNewUser(acc,tmpName);
+            acc.addAccount(acc);
+        }
         User user = acc.chooseUser(acc);
         m.readUserDetails(acc, user);
         m.displayOptions(acc, user);
