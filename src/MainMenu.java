@@ -35,7 +35,6 @@ public class MainMenu {
     }
 
     private void myList(Account acc, User user) {
-        ui.displayMessage("Din Liste: ");
         for (String s : user.getMyList()) {
             System.out.println(s);
         }
@@ -43,7 +42,7 @@ public class MainMenu {
         if (userChoiceYN) {
             ui.displayMessage("Her får du din liste igen: ");
             int count = 0;
-            for (String s : user.getMyList()) {
+            for (String s : user.getMyList().subList(1,user.getMyList().size())) {
                 count++;
                 System.out.println(count +". "+ s);
             }
@@ -51,13 +50,12 @@ public class MainMenu {
 
             //linjen tjekker om userChoiceNum er større end listen's størrelse eller om userChoiceNum er mindre end 0
             userChoiceNum = ui.promptIfNumCheck(userChoiceNum,user.getMyList().size());
-            m.playMedia(user, user.getMyList().get(userChoiceNum - 1));
-            user.getMyList().remove(userChoiceNum-1);
+            m.playMedia(user, user.getMyList().get(userChoiceNum));
+            user.getMyList().remove(userChoiceNum);
         }
     }
 
     private void haveWatchedList(Account acc, User user) {
-        ui.displayMessage("Din Sete Film: ");
         for (String s : user.getHaveWatched()) {
             System.out.println(s);
         }
@@ -76,12 +74,10 @@ public class MainMenu {
 
                 //Takes haveWatched and makes to a string
                 String haveWatchedStrTmp = String.join(",", user.getHaveWatched());
-                values[2] = haveWatchedStrTmp;
 
                 String myListStrTmp = String.join(",", user.getMyList());
-                values[3] = myListStrTmp;
 
-                String test = acc.getAccountName() + ";" + user.getName() + ";" + values[2] + ";" + values[3];
+                String test = acc.getAccountName() + ";" + user.getName() + ";" + haveWatchedStrTmp + ";" + myListStrTmp;
                 count = i;
                 tekst = test;
 
@@ -91,12 +87,10 @@ public class MainMenu {
             }else {
                 //Takes haveWatched and makes to a string
                 String haveWatchedStrTmp = String.join(",", user.getHaveWatched());
-                values[2] = haveWatchedStrTmp;
 
                 String myListStrTmp = String.join(",", user.getMyList());
-                values[3] = myListStrTmp;
 
-                String test = acc.getAccountName() + ";" + user.getName() + ";" + values[2] + ";" + values[3];
+                String test = acc.getAccountName() + ";" + user.getName() + ";" + haveWatchedStrTmp + ";" + myListStrTmp;
 
                 tekst = test;
             }

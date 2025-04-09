@@ -17,11 +17,16 @@ public class Account {
     public void addAccount(Account a){
         accounts.add(a);
         ArrayList<String> accountData = new ArrayList<>();
+        ArrayList<String> userDetails = new ArrayList<>();
+
+        userDetails.add(this.accountName + ";" + getUsers().getName() + ";Dine Sete Film:" + ";Din Liste:");
 
         for(Account b : accounts){
             String s = b.toString();
             accountData.add(s);
         }
+
+        io.saveData(userDetails, "data/userDetails.csv", "accountName;userName;HaveWatchedList;myList", true);
         io.saveData(accountData,"data/accountDetails.csv", "username;password;users", true);
     }
     

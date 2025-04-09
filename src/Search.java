@@ -112,29 +112,37 @@ public class Search {
     private String searchByText(){
             String textSearch =  ui.promptText("Indtast Søgeord");
             ui.displayMessage("Søger efter: " + textSearch);
-            ArrayList<String> results = new ArrayList<>();
+            ArrayList<Media> results = new ArrayList<>();
 
             for (Movie m : moviesLoad()) {
                 if (m.getName().toLowerCase().contains(textSearch.toLowerCase())) {
-                    results.add("Film: " + m.toString());
+                    results.add(m);
                 }
             }
 
             for (Series s : seriesLoad()) {
                 if (s.getName().toLowerCase().contains(textSearch.toLowerCase())) {
-                    results.add("Serie: " + s.toString());
+                    results.add(s);
                 }
             }
 
             if (results.isEmpty()) {
                 ui.displayMessage("Ingen resultater fundet.");
             } else {
-                ui.displayList(results, "Resultater:");
+                int count = 1;
+                for (Media m : results) {
+                    if(m instanceof Movie movie){
+                        System.out.println(count + ". " + "Film: " + movie);
+                    } else if (m instanceof Series s) {
+                        System.out.println(count + ". " + "Serie: " + s);
+                    }
+                    count++;
+                }
             }
             int userChoice = ui.promptNumeric("Vælg en Film eller Serie på listen: ");
 
             userChoice = ui.promptIfNumCheck(userChoice,results.size());
-            return results.get(userChoice-1);
+            return results.get(userChoice-1).getName();
     }
 
     private String searchMovie(){
