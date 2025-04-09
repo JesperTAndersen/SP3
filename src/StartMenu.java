@@ -52,6 +52,20 @@ public class StartMenu {
 
         a.createUser(ui.promptText("Ingen brugere fundet, opret ny med følgende navn: "));
 
+        boolean multipleUser = true;
+
+        while(multipleUser) {
+
+            if (ui.promptBinary("Vil du tilføje flere brugere? Y/N: ")) {
+                a.createUser(ui.promptText("Indtast Brugernavn: "));
+
+            } else {
+                multipleUser = false;
+            }
+
+        }
+
+
         // tilføj flere users før account create?
         a.addAccount(a);
         return a;

@@ -19,11 +19,15 @@ public class Account {
         ArrayList<String> accountData = new ArrayList<>();
         ArrayList<String> userDetails = new ArrayList<>();
 
-        userDetails.add(this.accountName + ";" + getUsers().getName() + ";Dine Sete Film:" + ";Din Liste:");
+        //userDetails.add(this.accountName + ";" + getUsers().getName() + ";Dine Sete Film:" + ";Din Liste:");
 
         for(Account b : accounts){
             String s = b.toString();
             accountData.add(s);
+        }
+        for(User u: users){
+            String y = u.getName();
+            userDetails.add(this.accountName + ";" + y + ";Dine Sete Film:" + ";Din Liste:");
         }
 
         io.saveData(userDetails, "data/userDetails.csv", "accountName;userName;HaveWatchedList;myList", true);
@@ -48,10 +52,13 @@ public class Account {
                 ui.displayMessage("** Oversigt over brugere **");
                 int count = 1;
                 for (String u : userList) {
-                    User user = new User(u);
-                    users.add(user);
-                    System.out.println(count +". " + u);
-                    count++;
+                    u = u.trim();
+                    if (!u.isEmpty()) {
+                        User user = new User(u);
+                        users.add(user);
+                        System.out.println(count + ". " + u);
+                        count++;
+                    }
                 }
                  int choice = ui.promptNumeric("Vælg bruger: ");
                 return users.get(choice-1);
