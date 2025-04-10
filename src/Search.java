@@ -203,7 +203,7 @@ public class Search {
         return results.get(userChoice - 1).getName();
     }
 
-    public ArrayList<Series> seriesLoad() {
+    private ArrayList<Series> seriesLoad() {
         if (allGenres.isEmpty()) {
             ArrayList<String> seriesData = io.readData("data/series.txt");
             seriesList.clear();

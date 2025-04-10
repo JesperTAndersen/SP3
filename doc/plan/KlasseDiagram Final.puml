@@ -43,7 +43,7 @@ class Search {
     - String loadFilmCatalogue()
     - String loadSeriesCatalogue()
     - String searchByGenre()
-    + ArrayList<Series> seriesLoad()
+    - ArrayList<Series> seriesLoad()
     - ArrayList<Movie> moviesLoad()
 }
 
@@ -51,9 +51,9 @@ class StartMenu {
     - ArrayList<String> accData
     + void runChill()
     - Account createAccount(String accountName, String password)
-    + String accountLogin(String accountName, String password)
-    + void loginSucces(Account acc)
-    + void loginSucces(String accountName, String password)
+    - String accountLogin(String accountName, String password)
+    - void loginSucces(Account acc)
+    - void loginSucces(String accountName, String password)
 }
 
 class Account {

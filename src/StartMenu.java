@@ -62,7 +62,7 @@ public class StartMenu {
         return a;
     }
 
-    public String accountLogin(String accountName, String password) {
+    private String accountLogin(String accountName, String password) {
         accData = io.readData("data/accountDetails.csv");
 
         while (true) { //Checks existing account
@@ -89,14 +89,14 @@ public class StartMenu {
         }
     }
 
-    public void loginSucces(Account acc) { //Login with new Account
+    private void loginSucces(Account acc) { //Login with new Account
         MainMenu m = new MainMenu();
         User user = acc.chooseUser(acc);
         m.readUserDetails(acc,user);
         m.displayOptions(acc, user);
     }
 
-    public void loginSucces(String accountName, String password) { //Login with Existing account
+    private void loginSucces(String accountName, String password) { //Login with Existing account
         Account acc = new Account(accountName, password);
         MainMenu m = new MainMenu();
         User user = acc.chooseUser(acc);
