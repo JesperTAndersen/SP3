@@ -89,14 +89,14 @@ public class StartMenu {
         }
     }
 
-    public void loginSucces(Account acc) { //Login with Existing account
+    public void loginSucces(Account acc) { //Login with new Account
         MainMenu m = new MainMenu();
         User user = acc.chooseUser(acc);
         m.readUserDetails(acc,user);
         m.displayOptions(acc, user);
     }
 
-    public void loginSucces(String accountName, String password) { //Login with new Account
+    public void loginSucces(String accountName, String password) { //Login with Existing account
         Account acc = new Account(accountName, password);
         MainMenu m = new MainMenu();
         User user = acc.chooseUser(acc);
