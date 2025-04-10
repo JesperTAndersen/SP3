@@ -50,6 +50,7 @@ public class Search {
                 break;
 
             case 3: //SeriesCatalogue
+
                 String seriesChoice = loadSeriesCatalogue();
                 ui.displayMessage("** Medie muligheder **");
 
@@ -66,6 +67,7 @@ public class Search {
                 break;
 
             case 4: //SearchGenre
+
                 String genreChoice = searchByGenre();
                 ui.displayMessage("** Medie muligheder **");
 

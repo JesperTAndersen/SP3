@@ -35,9 +35,7 @@ public class Account {
     
     public User chooseUser(Account account){
 
-        ArrayList<String> userData = new ArrayList<>();
-
-        userData = io.readData("data/accountDetails.csv");
+        ArrayList<String> userData = io.readData("data/accountDetails.csv");
 
         for (int i = 0; i < userData.size(); i++) {
             String[] values = userData.get(i).split(";");
