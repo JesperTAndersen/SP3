@@ -8,10 +8,6 @@ public class Movie extends Media{
         super(name, releaseYear, genre, imdbRating);
     }
 
-    public ArrayList<String> getMovies(){
-        return this.moviesList;
-    }
-
     @Override
     public String toString() {
         return super.toString();

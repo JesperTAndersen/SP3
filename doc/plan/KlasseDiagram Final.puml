@@ -1,0 +1,104 @@
+@startuml
+Abstract class Media {
+    - String name
+    - String releaseYear
+    - String genre
+    - String imdbRating
+    + Media(String name, String releaseYear, String genre, String imdbRating)
+    + String toString()
+}
+
+class Movie {
+    - ArrayList<String> moviesList
+    + Movie()
+    + Movie(String name, String releaseYear, String genre, String imdbRating)
+    + String toString()
+}
+
+class Series {
+
+    + Series(String name, String releaseYear, String genre, String imdbRating)
+    + String toString()
+}
+
+class User {
+    - String name
+    - ArrayList<String> haveWatched
+    - ArrayList<String> myList
+    + User(String name)
+    + void addToHaveWatched(String mediaName)
+    + void addMyList(String mediaName)
+    + ArrayList<String> getHaveWatched()
+    + ArrayList<String> getMyList()
+    + String getName()
+    + String toString()
+}
+
+class Search {
+    - ArrayList<Series> seriesList
+    - ArrayList<Movie> moviesList
+    - ArrayList<String> allGenres
+    + void searchOptions(User user)
+    - String searchByText()
+    - String loadFilmCatalogue()
+    - String loadSeriesCatalogue()
+    - String searchByGenre()
+    + ArrayList<Series> seriesLoad()
+    - ArrayList<Movie> moviesLoad()
+}
+
+class StartMenu {
+    - ArrayList<String> accData
+    + void runChill()
+    - Account createAccount(String accountName, String password)
+    + String accountLogin(String accountName, String password)
+    + void loginSucces(Account acc)
+    + void loginSucces(String accountName, String password)
+}
+
+class Account {
+    - String accountName
+    - String password
+    + Account(String accountName, String password)
+    + void createUser(String userName)
+    + User chooseUser(Account acc)
+    + void addAccount(Account acc)
+}
+
+class FileIO {
+    + void saveData(ArrayList<String> list, String path, String header, boolean append)
+    + ArrayList<String> readData(String path)
+    + String[] readData(String path, int length)
+}
+
+class TextUI {
+    + void displayMessage(String message)
+    + int promptNumeric(String prompt)
+    + String promptText(String prompt)
+    + boolean promptBinary(String prompt)
+    + int promptIfNumCheck(int choice, int size)
+}
+
+class MainMenu {
+    - static FileIO io
+    - static TextUI ui
+    + void displayOptions(Account acc, User user)
+    - void myList(User user)
+    - void haveWatchedList(User user)
+    - void logout(Account acc, User user)
+    - void readUserDetails(Account acc, User user)
+}
+StartMenu *-- Account
+Account <|-- User
+StartMenu *-- MainMenu
+MainMenu *-- Search
+Search *-- Media
+Media <|-- Movie
+Media <|-- Series
+Account *-- MainMenu
+
+StartMenu *-- FileIO
+StartMenu *-- TextUI
+
+
+@enduml

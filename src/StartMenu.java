@@ -1,14 +1,11 @@
 import java.util.ArrayList;
 
 public class StartMenu {
-    TextUI ui = new TextUI();
-    FileIO io = new FileIO();
-
-
+    private static  FileIO io = new FileIO();
+    private static TextUI ui = new TextUI();
     private ArrayList<String> accData;
 
-
-    public void runChill() {
+    public void runChill() {    //Starts the program
         ui.displayMessage("Velkommen til Chill");
         int userChoice = ui.promptNumeric("1. Login\n2. Opret Konto");
 
@@ -32,7 +29,6 @@ public class StartMenu {
                 ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
                 runChill();
         }
-
     }
 
     private Account createAccount(String accountName, String password) {
@@ -47,22 +43,20 @@ public class StartMenu {
                 return this.createAccount(tmpaccountName, password);
             }
         }
+
         Account a = new Account(accountName, password);
         ui.displayMessage("Konto oprettet!");
-
         a.createUser(ui.promptText("Ingen brugere fundet, opret ny med følgende navn: "));
 
+        //Create Multiple users
         boolean multipleUser = true;
-
         while(multipleUser) {
 
             if (ui.promptBinary("Vil du tilføje flere brugere? Y/N: ")) {
                 a.createUser(ui.promptText("Indtast Brugernavn: "));
-
             } else {
                 multipleUser = false;
             }
-
         }
         a.addAccount(a);
         return a;
@@ -71,7 +65,7 @@ public class StartMenu {
     public String accountLogin(String accountName, String password) {
         accData = io.readData("data/accountDetails.csv");
 
-        while (true) {
+        while (true) { //Checks existing account
             for (String line : accData) {
                 String[] values = line.split(";");
                 if (values.length < 2)
@@ -92,24 +86,21 @@ public class StartMenu {
             //Prompts the user for accountname and password again to run back into the while loop
             accountName = ui.promptText("Brugernavn: ");
             password = ui.promptText("Kodeord: ");
-
         }
-
     }
 
-    public void loginSucces(Account acc) {
+    public void loginSucces(Account acc) { //Login with Existing account
         MainMenu m = new MainMenu();
         User user = acc.chooseUser(acc);
         m.readUserDetails(acc,user);
         m.displayOptions(acc, user);
     }
 
-    public void loginSucces(String accountName, String password) {
+    public void loginSucces(String accountName, String password) { //Login with new Account
         Account acc = new Account(accountName, password);
         MainMenu m = new MainMenu();
         User user = acc.chooseUser(acc);
         m.readUserDetails(acc, user);
         m.displayOptions(acc, user);
     }
-
 }

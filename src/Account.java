@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Account {
-    FileIO io = new FileIO();
-    TextUI ui = new TextUI();
+    private static  FileIO io = new FileIO();
+    private static TextUI ui = new TextUI();
 
     private String accountName;
     private String password;
@@ -24,10 +24,11 @@ public class Account {
             accountData.add(s);
         }
         for(User u: users){
-            String y = u.getName();
-            userDetails.add(this.accountName + ";" + y + ";Dine Sete Film:" + ";Din Liste:");
+            String usersName = u.getName();
+            //adds all the below information to userDetails
+            userDetails.add(this.accountName + ";" + usersName + ";Dine Sete Film:" + ";Din Liste:");
         }
-
+        //saves all the data
         io.saveData(userDetails, "data/userDetails.csv", "accountName;userName;HaveWatchedList;myList", true);
         io.saveData(accountData,"data/accountDetails.csv", "username;password;users", true);
     }
@@ -41,6 +42,7 @@ public class Account {
         for (int i = 0; i < userData.size(); i++) {
             String[] values = userData.get(i).split(";");
             String searchAccount = values[0];
+            //if statement checks if the accountName is the same as searchAccount and if true...
             if(accountName.equalsIgnoreCase(searchAccount)){
                 String[] userList;
                 String value = values[2];
@@ -49,6 +51,7 @@ public class Account {
 
                 ui.displayMessage("** Oversigt over brugere **");
                 int count = 1;
+                //prints the list userList numbered
                 for (String u : userList) {
                     u = u.trim();
                     if (!u.isEmpty()) {
@@ -58,19 +61,14 @@ public class Account {
                         count++;
                     }
                 }
-                 int choice = ui.promptNumeric("Vælg bruger: ");
+                //Asks the user for a number and uses that number to return a user from the list users
+                int choice = ui.promptNumeric("Vælg bruger: ");
                 return users.get(choice-1);
             }
         }
+        //if it doesnt do the above it returns null
         return null;
     }
-
-    public User getUsers(){
-        for (User u : users){
-            return u;
-        }return null;
-    }
-
 
     @Override
     public String toString() {
