@@ -22,21 +22,13 @@ public class Search {
 
                 int userChoice3 = ui.promptNumeric("1. Se Film/Serie.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
                 switch (userChoice3) {
-                    case 1:
-                        series.playMedia(user, mediaChoice);
-                        break;
-
-                    case 2:
-                        user.addMyList(mediaChoice);
-                        break;
-
-                    case 3:
-                        searchOptions(user);
-                        break;
-
-                    default:
+                    case 1 -> series.playMedia(user, mediaChoice);
+                    case 2 -> user.addMyList(mediaChoice);
+                    case 3 -> searchOptions(user);
+                    default -> {
                         ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
                         searchOptions(user);
+                    }
                 }
                 break;
 
@@ -47,21 +39,13 @@ public class Search {
 
                 int userChoice1 = ui.promptNumeric("1. Se Film.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
                 switch (userChoice1) {
-                    case 1:
-                        movie.playMedia(user, movieChoice);
-                        break;
-
-                    case 2:
-                        user.addMyList(movieChoice);
-                        break;
-
-                    case 3:
-                        searchOptions(user);
-                        break;
-
-                    default:
+                    case 1 -> movie.playMedia(user, movieChoice);
+                    case 2 -> user.addMyList(movieChoice);
+                    case 3 -> searchOptions(user);
+                    default -> {
                         ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
                         searchOptions(user);
+                    }
                 }
                 break;
 
@@ -71,21 +55,13 @@ public class Search {
 
                 int userChoice2 = ui.promptNumeric("1. Se Serie.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
                 switch (userChoice2) {
-                    case 1:
-                        series.playMedia(user, seriesChoice);
-                        break;
-
-                    case 2:
-                        user.addMyList(seriesChoice);
-                        break;
-
-                    case 3:
-                        searchOptions(user);
-                        break;
-
-                    default:
+                    case 1 -> series.playMedia(user, seriesChoice);
+                    case 2 -> user.addMyList(seriesChoice);
+                    case 3 -> searchOptions(user);
+                    default -> {
                         ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
                         searchOptions(user);
+                    }
                 }
                 break;
 
@@ -95,21 +71,13 @@ public class Search {
 
                 int userChoice4 = ui.promptNumeric("1. Se Film/Serie.\n2. Tilføj til Min Liste.\n3. Gå tilbage.");
                 switch (userChoice4) {
-                    case 1:
-                        series.playMedia(user, genreChoice);
-                        break;
-
-                    case 2:
-                        user.addMyList(genreChoice);
-                        break;
-
-                    case 3:
-                        searchOptions(user);
-                        break;
-
-                    default:
+                    case 1 -> series.playMedia(user, genreChoice);
+                    case 2 -> user.addMyList(genreChoice);
+                    case 3 -> searchOptions(user);
+                    default -> {
                         ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
                         searchOptions(user);
+                    }
                 }
 
             default:
@@ -245,7 +213,6 @@ public class Search {
                 String releaseYear = series[1].trim();
                 String genre = series[2].trim();
                 String imdbRating = series[3].trim();
-                String seasonsEpisodes = series[4].trim();
 
                 String[] splitGenres = genre.split(","); //splits and add to genre array
                 for (String genres : splitGenres) {
