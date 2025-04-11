@@ -81,6 +81,7 @@ public class Search {
                         searchOptions(user);
                     }
                 }
+                break;
 
             default:
                 ui.displayMessage("Vælg venligst en gyldig valgmulighed: ");
