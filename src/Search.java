@@ -204,7 +204,6 @@ public class Search {
     }
 
     private ArrayList<Series> seriesLoad() {
-        if (allGenres.isEmpty()) {
             ArrayList<String> seriesData = io.readData("data/series.txt");
             seriesList.clear();
 
@@ -228,12 +227,11 @@ public class Search {
                 Series s = new Series(serieName, releaseYear, genre, imdbRating);
                 seriesList.add(s);
             }
-        }
+
         return seriesList;
     }
 
     private ArrayList<Movie> moviesLoad() {
-        if (allGenres.isEmpty()) {
             ArrayList<String> movieData = io.readData("data/movies.txt");
             moviesList.clear();
 
@@ -257,7 +255,7 @@ public class Search {
                 Movie m = new Movie(movieName, releaseYear, genre, imdbRating);
                 moviesList.add(m);
             }
-        }
+
         return moviesList;
     }
 }

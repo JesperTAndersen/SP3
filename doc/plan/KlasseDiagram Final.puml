@@ -89,7 +89,7 @@ class MainMenu {
     - void readUserDetails(Account acc, User user)
 }
 StartMenu *-- Account
-Account <|-- User
+Account *-- User
 StartMenu *-- MainMenu
 MainMenu *-- Search
 Search *-- Media
